@@ -1,0 +1,238 @@
+<html>
+
+    <head>
+        <title>
+            First p5.js page
+        </title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+        <script>
+            //player coordinates
+            var PlayerX=400;
+            var PlayerY=300;
+            var PlayerDiameter=25;
+
+            //Key Input
+            var w=87;
+            var a=65;
+            var s=83;
+            var d=68;
+
+            //shape varibles
+            var obstacleX=30;
+            var obstacleY=60;
+            var obstacleXSpeed;
+            var obstacleYSpeed;
+
+            var gateX=10;
+            var gateY=150;
+            var gateSpeedY;
+            var gateSpeedX;
+
+            var createShapeX;
+            var createShapeY;
+
+            //scene setup
+            function setup()
+            {
+                createCanvas(800,600);
+                obstacleXSpeed=Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+                obstacleYSpeed=Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+                //gate speed random
+                gateSpeedY=Math.floor(Math.random() * (Math.floor(Math.random() * 10)) + 1);
+                gateSpeedX=Math.floor(Math.random() * (Math.floor(Math.random() * 10)) + 1);
+                //create character 
+                createCharacter(580,200);
+            }
+            function draw()
+            {
+                background(138, 23, 0);
+
+                //goal
+                createGoal();
+
+                //borders
+                createBorders(10);
+
+                //player circle
+                drawCharacter();
+
+                //ctrl
+                characterControl();
+
+                //obstacles
+                createObstacle();
+                
+                //object random speed
+                circleSpeed
+
+                //gate random speed
+                gateSpeed
+
+                //movement
+                circleMovement();
+                gateMovement();
+
+                //victory
+                victoryMessage(800,600);
+                //createshape
+                fill(255, 230, 0);
+                circle(createShapeX,createShapeY,75);
+            }
+
+                //mouse obstacle
+                function mouseClicked()
+                {
+                    createShapeX=mouseX;
+                    createShapeY=mouseY;
+                }
+                
+                //functions for the homework!
+                function createBorders(chonk)
+                {
+                stroke(0);
+                fill(0);
+                rect(0,0,width,chonk);
+                rect(0,0,chonk,height-50);
+                rect(0,height-chonk,width,chonk);
+                rect(width-chonk,0,chonk,height-chonk,);
+                }
+                //create goal
+                function createGoal()
+                {
+                fill(68, 255, 0);
+                rect(0,0,7,height-10);
+                }
+                //create character
+                function createCharacter(x,y)
+                {
+                    PlayerX=x;
+                    PlayerY=y;
+                    fill(0);
+                    circle(PlayerX,PlayerY,PlayerDiameter);
+                }
+
+                function drawCharacter()
+                {
+                    fill(0);
+                    circle(PlayerX,PlayerY,PlayerDiameter);
+                }
+                //ctrl
+                function characterControl()
+                {
+                if(keyIsDown(w))
+                {
+                    PlayerY -= 2;   
+                }
+                if(keyIsDown(s))
+                {
+                    PlayerY += 2;   
+                }
+                if(keyIsDown(a))
+                {
+                    PlayerX -= 2;   
+                }
+                if(keyIsDown(d))
+                {
+                    PlayerX += 2;   
+                }
+                }
+                //obstacle 1
+                function createObstacle()
+                {
+                fill(34, 187, 255)
+                circle(obstacleX,obstacleY,40)
+                fill(162, 3, 255)
+                rect(gateX,gateY,50,150)
+                }
+                //circle speed
+                function circleSpeed()
+                {
+                obstacleXSpeed=Math.floor(Math.random() * (Math.floor(Math.random() * 30)) + 1);
+                obstacleYSpeed=Math.floor(Math.random() * (Math.floor(Math.random() * -5)) + 1);
+                }
+                //gate speed
+                function gateSpeed()
+                {
+                gateSpeedY=Math.floor(Math.random() * (Math.floor(Math.random() * 15)) + 1);
+                gateSpeedX=Math.floor(Math.random() * (Math.floor(Math.random() * 10)) + 1);
+                }
+
+                function circleMovement()
+                {
+                obstacleX += obstacleXSpeed;
+                obstacleY += obstacleYSpeed;
+                if(obstacleX>width)
+                {
+                    obstacleX=0;
+                }
+
+                if(obstacleX<0)
+                {
+                    obstacleX=width
+                }
+
+                if(obstacleY>height)
+                {
+                    obstacleY=0
+                }
+
+                if(obstacleY<0)
+                {
+                    obstacleY=height
+                }
+                }
+                function gateMovement()
+                {
+                gateY += gateSpeedY;
+                if(gateY>height)
+                {
+                    gateY=0
+                }
+
+                if(gateY<0)
+                {
+                    gateY=height
+                }
+                }
+                function victoryMessage(width,height)
+                {
+                if(PlayerX < 10 && PlayerY >= 560)
+                {
+                    fill(255, 230, 0);
+                    textSize(30);
+                    text("Conglaturations you're won!",width/4, height/2);
+                }
+                }
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>

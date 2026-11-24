@@ -1,0 +1,179 @@
+<html>
+
+    <head>
+        <title>
+            First p5.js page
+        </title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+        <script>
+            //player coordinates
+            var PlayerX=400;
+            var PlayerY=300;
+            var PlayerDiameter=25;
+
+            //Key Input
+            var w=87;
+            var a=65;
+            var s=83;
+            var d=68;
+
+            //shape varibles
+            var obstacleX=30;
+            var obstacleY=60;
+            var obstacleXSpeed;
+            var obstacleYSpeed;
+
+            var gateX=10;
+            var gateY=150;
+            var gateSpeedY;
+            var gateSpeedX;
+
+            var createShapeX;
+            var createShapeY;
+
+            //scene setup
+            function setup()
+            {
+                createCanvas(800,600);
+                obstacleXSpeed=Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+                obstacleYSpeed=Math.floor(Math.random() * (Math.floor(Math.random() * 5)) + 1);
+                //gate speed random
+                gateSpeedY=Math.floor(Math.random() * (Math.floor(Math.random() * 10)) + 1);
+                gateSpeedX=Math.floor(Math.random() * (Math.floor(Math.random() * 10)) + 1);
+            }
+            function draw()
+            {
+                background(138, 23, 0);
+
+                //goal
+                fill(68, 255, 0);
+                rect(0,0,7,height-10);
+
+                //borders
+                stroke(0);
+                fill(0);
+                rect(0,0,width,10);
+                rect(0,0,10,height-50);
+                rect(0,height-10,width,10);
+                rect(width-10,0,10,height-10,);
+
+                //player circle
+                circle(PlayerX,PlayerY,PlayerDiameter);
+
+                //ctrl
+                if(keyIsDown(w))
+                {
+                    PlayerY -= 2;   
+                }
+                if(keyIsDown(s))
+                {
+                    PlayerY += 2;   
+                }
+                if(keyIsDown(a))
+                {
+                    PlayerX -= 2;   
+                }
+                if(keyIsDown(d))
+                {
+                    PlayerX += 2;   
+                }
+
+                //obstacle circle
+                fill(34, 187, 255)
+                circle(obstacleX,obstacleY,40)
+                //gate
+                fill(162, 3, 255)
+                rect(gateX,gateY,50,150)
+                //object random speed
+                obstacleXSpeed=Math.floor(Math.random() * (Math.floor(Math.random() * 30)) + 1);
+                obstacleYSpeed=Math.floor(Math.random() * (Math.floor(Math.random() * -5)) + 1);
+
+                //gate random speed
+                gateSpeedY=Math.floor(Math.random() * (Math.floor(Math.random() * 15)) + 1);
+                gateSpeedX=Math.floor(Math.random() * (Math.floor(Math.random() * 10)) + 1);
+
+                //movement
+                obstacleX += obstacleXSpeed;
+                obstacleY += obstacleYSpeed;
+                gateY += gateSpeedY;
+
+                if(obstacleX>width)
+                {
+                    obstacleX=0;
+                }
+
+                if(obstacleX<0)
+                {
+                    obstacleX=width
+                }
+
+                if(obstacleY>height)
+                {
+                    obstacleY=0
+                }
+
+                if(obstacleY<0)
+                {
+                    obstacleY=height
+                }
+
+                if(gateY>height)
+                {
+                    gateY=0
+                }
+
+                if(gateY<0)
+                {
+                    gateY=height
+                }
+                //victory
+                if(PlayerX < 10 && PlayerY >= 560)
+                {
+                    fill(255, 230, 0);
+                    stroke(5);
+                    textSize(30);
+                    text("Conglaturations you're won!",width/4, height/2);
+                }
+
+                //createshape
+                fill(255, 230, 0);
+                circle(createShapeX,createShapeY,75);
+            }
+
+                //mouse obstacle
+                function mouseClicked()
+                {
+                    createShapeX=mouseX;
+                    createShapeY=mouseY;
+                }
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
